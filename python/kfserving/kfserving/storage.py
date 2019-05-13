@@ -4,15 +4,15 @@ import os
 
 _GCS_PREFIX = "gs://"
 _S3_PREFIX = "s3://"
-_LOCAL_PREFIX = "/"
+_LOCAL_PREFIX = "file://"
 
 
 class Storage(object):
     @staticmethod
     def download(uri: str) -> str:
         logging.info("Copying contents of %s to local" % uri)
-        if uri.startswith(_LOCAL_PREFIX) or os.path.exists(uri):
-            return uri
+        if uri.startswith(_LOCAL_PREFIX):
+            return Storage._download_local(uri)
 
         temp_dir = tempfile.mkdtemp()
         if uri.startswith(_GCS_PREFIX):
@@ -32,3 +32,10 @@ class Storage(object):
     @staticmethod
     def _download_gcs(uri, temp_dir: str):
         raise NotImplementedError
+
+    @staticmethod
+    def _download_local(uri):
+        local_path = uri.replace(_LOCAL_PREFIX, "", 1)
+        if not os.path.exists(local_path):
+            logging.warning("Local path %s is not exist." % (uri))
+        return local_path

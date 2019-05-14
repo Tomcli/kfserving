@@ -20,7 +20,9 @@ class Storage(object):
         elif uri.startswith(_S3_PREFIX):
             Storage._download_s3(uri, temp_dir)
         else:
-            raise Exception("Cannot recognize storage type for " + uri)
+            raise Exception("Cannot recognize storage type for " + uri +
+                            "\n'%s', '%s', and '%s' are the current available storage type." %
+                            (_GCS_PREFIX, _S3_PREFIX, _LOCAL_PREFIX))
 
         logging.info("Successfully copied %s to %s" % (uri, temp_dir))
         return temp_dir
@@ -37,5 +39,5 @@ class Storage(object):
     def _download_local(uri):
         local_path = uri.replace(_LOCAL_PREFIX, "", 1)
         if not os.path.exists(local_path):
-            logging.warning("Local path %s is not exist." % (uri))
+            raise Exception("Local path %s does not exist." % (uri))
         return local_path

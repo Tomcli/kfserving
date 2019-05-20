@@ -1,8 +1,8 @@
 apiVersion: "serving.kubeflow.org/v1alpha1"
 kind: "KFService"
 metadata:
-  name: "xgboost-iris"
+  name: "sklearn-iris"
 spec:
   default:
-    xgBoost:
+    SKLearn:
       modelUri: "/tmp/models"

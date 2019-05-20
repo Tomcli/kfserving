@@ -18,10 +18,10 @@ import (
 )
 
 const (
-	SKLearnEntrypointCommand = ""
+	SKLearnEntrypointCommand = "python"
 	SKLearnServingGRPCPort   = "9000"
 	SKLearnServingRestPort   = "8080"
-	SKLearnServingImageName  = "animeshsingh/sklearnserver"
+	SKLearnServingImageName  = "tomcli/sklearnserver"
 
 	DefaultSKLearnServingVersion = "latest"
 )
@@ -33,10 +33,10 @@ func (s *SKLearnSpec) CreateModelServingContainer(modelName string) *v1.Containe
 		Command:   []string{SKLearnEntrypointCommand},
 		Resources: s.Resources,
 		Args: []string{
-			"--port=" + SKLearnServingGRPCPort,
-			"--rest_api_port=" + SKLearnServingRestPort,
+			"-m",
+			"sklearnserver",
 			"--model_name=" + modelName,
-			"--model_base_path=" + s.ModelURI,
+			"--model_dir=" + s.ModelURI,
 		},
 	}
 }

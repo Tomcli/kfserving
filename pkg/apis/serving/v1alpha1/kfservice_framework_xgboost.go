@@ -18,7 +18,6 @@ import (
 )
 
 const (
-	XGBoostEntrypointCommand = "python"
 	XGBoostServingGRPCPort   = "9000"
 	XGBoostServingRestPort   = "8080"
 	XGBoostServingImageName  = "tomcli/xgboostserver"
@@ -30,11 +29,8 @@ func (x *XGBoostSpec) CreateModelServingContainer(modelName string) *v1.Containe
 	//TODO(@animeshsingh) add configmap for image, default resources, readiness/liveness probe
 	return &v1.Container{
 		Image:     XGBoostServingImageName + ":" + x.RuntimeVersion,
-		Command:   []string{XGBoostEntrypointCommand},
 		Resources: x.Resources,
 		Args: []string{
-			"-m",
-			"xgbserver",
 			"--model_name=" + modelName,
 			"--model_dir=" + x.ModelURI,
 		},

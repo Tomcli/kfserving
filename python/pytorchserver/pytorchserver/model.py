@@ -54,7 +54,7 @@ class PyTorchModel(kfserving.KFModel):
 
     def predict(self, body: List) -> List:
         try:
-            inputs = torch.FloatTensor(body)
+            inputs = torch.tensor(body)
         except Exception as e:
             raise Exception(
                 "Failed to initialize Torch Tensor from inputs: %s, %s" % (e, inputs))

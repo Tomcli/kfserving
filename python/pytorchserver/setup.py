@@ -34,7 +34,7 @@ setup(
         "torch >= 1.1.0",
         "argparse >= 1.4.0",
         "numpy >= 1.8.2",
-        "torchvision"
+        "torchvision >= 0.2.1"
     ],
     tests_require=tests_require,
     extras_require={'test': tests_require}

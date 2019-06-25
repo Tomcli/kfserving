@@ -17,7 +17,7 @@ import argparse
 
 from pytorchserver import PyTorchModel
 
-DEFAULT_MODEL_NAME = "model"
+DEFAULT_MODEL_NAME = "model.pt"
 DEFAULT_LOCAL_MODEL_DIR = "/tmp/model"
 DEFAULT_MODEL_CLASS_NAME = "model"
 

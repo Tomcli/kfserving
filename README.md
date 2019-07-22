@@ -22,3 +22,4 @@ kubectl apply -f ./install/$TAG/kfserving.yaml
 * [Developer Guide](/docs/DEVELOPER_GUIDE.md).
 
 ![KFServing](./docs/diagrams/kfserving.png)
+

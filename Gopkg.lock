@@ -523,14 +523,6 @@
   version = "v1.0.0-rc1"
 
 [[projects]]
-  digest = "1:93b1d84c5fa6d1ea52f4114c37714cddd84d5b78f151b62bb101128dd51399bf"
-  name = "github.com/pborman/uuid"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "adf5a7427709b9deb95d29d3fa8a2bf9cfd388f1"
-  version = "v1.2"
-
-[[projects]]
   digest = "1:14715f705ff5dfe0ffd6571d7d201dd8e921030f8070321a79380d8ca4ec1a24"
   name = "github.com/pkg/errors"
   packages = ["."]
@@ -971,7 +963,7 @@
   revision = "4206685974f28e3178b35fa198a59899aa4dee3a"
 
 [[projects]]
-  digest = "1:c604898594eeee32aaa4a835f5aace4784759efab0158253afc76bd8d5f58dd0"
+  digest = "1:2b55f57d7b6d9f0f23478f2432b03273073f1bf93aed18620472e7117eb4451e"
   name = "k8s.io/api"
   packages = [
     "admission/v1beta1",
@@ -1013,11 +1005,11 @@
     "storage/v1beta1",
   ]
   pruneopts = "NUT"
-  revision = "159aefb8556bb8ed4be7631461d1558546d304db"
-  version = "kubernetes-1.14.9"
+  revision = "3544db3b9e4494309507e02eced5cd9dcff47e6a"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
-  digest = "1:ed7c34efd128dcd262588a3e366e1b8f5ef1d4c152b3acccb9dbc03628a280f4"
+  digest = "1:e53c720ac9b16d35cbc40bbb07582c24f1a89557b89fe35328f539e5fa1a34d8"
   name = "k8s.io/apiextensions-apiserver"
   packages = [
     "pkg/apis/apiextensions",
@@ -1028,11 +1020,11 @@
     "pkg/features",
   ]
   pruneopts = "NUT"
-  revision = "f299f23b335be42151c8b0fb5bd774892bba6619"
-  version = "kubernetes-1.14.9"
+  revision = "0dbe462fe92dfa8b56cc9facf0658a17d0c70fc5"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
-  digest = "1:993f08d6d2e8261dbe551828d26cd07e0f063adb02a175af3b80956daf89f391"
+  digest = "1:c6c2d2f4e92d55147809092901378a92d8df0325769af9a534c3d4b3ab3a6f47"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/equality",
@@ -1083,22 +1075,22 @@
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "NUT"
-  revision = "c5d2f014d689246b84637774317fa0288dd3129b"
-  version = "kubernetes-1.14.9"
+  revision = "f2f3a405f61d6c2cdc0d00687c1b5d90de91e9f0"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
-  digest = "1:fe60b6d8b8208ecb0e70e97963fef38ce27443c6934ec00a37f80a3f9372f42b"
+  digest = "1:2e3f244d6f43f038d3fa4450be13ca29574df19f32f64f358a75c24770d5f002"
   name = "k8s.io/apiserver"
   packages = [
     "pkg/features",
     "pkg/util/feature",
   ]
   pruneopts = "NUT"
-  revision = "cb77609d744915e80394ba115d018096d2d69dfb"
-  version = "kubernetes-1.14.9"
+  revision = "92cc630367d00d05752f0cf0d6eca534bcd1e5a3"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
-  digest = "1:b740d051e5a5942929b732bec991dafe991c7df3ceb2063dcbd88443f51ba538"
+  digest = "1:84e649f1d4593651ffcac36c97af837f29d83d29d130961a6903fd6b9709c28d"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
@@ -1260,11 +1252,11 @@
     "util/workqueue",
   ]
   pruneopts = "NUT"
-  revision = "8e412805300829bc5a39e63eaccfc8a3355e4797"
-  version = "kubernetes-1.14.9"
+  revision = "e14f31a72a77f7aa82a95eaf542d1194fb027d04"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
-  digest = "1:2d821667dbd520a7ef31bdc923543f197ba30021b4317fd8871618ada52f23b0"
+  digest = "1:f41480fd8c5f54b13326ee0f2ee398d5734789b790dbc4db57f9b08a0d63139a"
   name = "k8s.io/code-generator"
   packages = [
     "cmd/client-gen",
@@ -1281,8 +1273,8 @@
     "pkg/util",
   ]
   pruneopts = "T"
-  revision = "50b561225d70b3eb79a1faafd3dfe7b1a62cbe73"
-  version = "kubernetes-1.14.9"
+  revision = "18da4a14b22b17d2fa761e50037fabfbacec225b"
+  version = "kubernetes-1.15.3"
 
 [[projects]]
   branch = "master"
@@ -1317,7 +1309,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:5898c2da865062498f96c145f1712b5c507d22660adb38308a8363bfc11a067c"
+  digest = "1:d5309a10463a997e48d5e3285e1170f0029dd587bf7c65c5c3462ee4f089b2d5"
   name = "k8s.io/kube-openapi"
   packages = [
     "cmd/openapi-gen",
@@ -1329,7 +1321,7 @@
     "pkg/util/sets",
   ]
   pruneopts = "NUT"
-  revision = "30be4d16710ac61bce31eb28a01054596fe6a9f1"
+  revision = "b3a7cee44a305be0a69e1b9ac03018307287e1b0"
 
 [[projects]]
   digest = "1:b76ee5cccef873546b437ebcaff2fd8c908154dbb398c9e8d7d612f152ff9aa8"

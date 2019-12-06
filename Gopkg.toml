@@ -63,23 +63,23 @@ version="v1.4.7"
 
 [[override]]
   name = "k8s.io/api"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"
 
 [[override]]
   name = "k8s.io/apimachinery"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"
 
 [[override]]
   name = "k8s.io/code-generator"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"
 
 [[override]]
   name = "k8s.io/client-go"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"
 
 [[constraint]]
   name = "k8s.io/kube-openapi"
-  revision = "30be4d16710ac61bce31eb28a01054596fe6a9f1"
+  revision = "b3a7cee44a305be0a69e1b9ac03018307287e1b0"
 
 [[override]]
   name = "github.com/tensorflow/tensorflow"
@@ -91,12 +91,12 @@ version="v1.4.7"
 
 [[constraint]]
   name = "k8s.io/kubernetes"
-  version = "v1.14.9"
+  version = "1.15.3"
 
 [[override]]
   name = "k8s.io/apiserver"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"
 
 [[override]]
   name = "k8s.io/apiextensions-apiserver"
-  version = "kubernetes-1.14.9"
+  version = "kubernetes-1.15.3"

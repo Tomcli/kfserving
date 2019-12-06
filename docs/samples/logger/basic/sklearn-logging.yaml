@@ -5,7 +5,7 @@ metadata:
 spec:
   default:
     predictor:
-      minReplicas: 1      
+      minReplicas: 1
       logger:
         url: http://message-dumper.default/
         mode: all

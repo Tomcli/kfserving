@@ -30,7 +30,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
-	webhooktypes "sigs.k8s.io/controller-runtime/pkg/webhook/types"
+	// webhooktypes "sigs.k8s.io/controller-runtime/pkg/webhook/types"
 )
 
 var log = logf.Log.WithName(constants.WebhookServerName)
@@ -79,7 +79,7 @@ func register(manager manager.Manager, server *webhook.Server) error {
 		&admission.Webhook{
 			Name:          constants.InferenceServiceValidatingWebhookName,
 			FailurePolicy: &constants.WebhookFailurePolicy,
-			Type:          webhooktypes.WebhookTypeValidating,
+			// Type:          webhooktypes.WebhookTypeValidating,
 			Rules: []v1beta1.RuleWithOperations{{
 				Operations: []v1beta1.OperationType{
 					v1beta1.Create,
@@ -101,7 +101,7 @@ func register(manager manager.Manager, server *webhook.Server) error {
 		&admission.Webhook{
 			Name:          constants.InferenceServiceDefaultingWebhookName,
 			FailurePolicy: &constants.WebhookFailurePolicy,
-			Type:          webhooktypes.WebhookTypeMutating,
+			// Type:          webhooktypes.WebhookTypeMutating,
 			Rules: []v1beta1.RuleWithOperations{{
 				Operations: []v1beta1.OperationType{
 					v1beta1.Create,
@@ -124,7 +124,7 @@ func register(manager manager.Manager, server *webhook.Server) error {
 	podWebhook := &admission.Webhook{
 		Name:          constants.PodMutatorWebhookName,
 		FailurePolicy: &constants.WebhookFailurePolicy,
-		Type:          webhooktypes.WebhookTypeMutating,
+		// Type:          webhooktypes.WebhookTypeMutating,
 		Rules: []v1beta1.RuleWithOperations{{
 			Operations: []v1beta1.OperationType{
 				v1beta1.Create,

@@ -28,17 +28,17 @@ import (
 	"github.com/kubeflow/kfserving/pkg/webhook/third_party"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
-	"sigs.k8s.io/controller-runtime/pkg/webhook/admission/types"
+	// "sigs.k8s.io/controller-runtime/pkg/webhook/admission/types"
 )
 
 // Mutator is a webhook that injects incoming pods
 type Mutator struct {
 	Client  client.Client
-	Decoder types.Decoder
+	Decoder admission.Decoder
 }
 
 // Handle decodes the incoming Pod and executes mutation logic.
-func (mutator *Mutator) Handle(ctx context.Context, req types.Request) types.Response {
+func (mutator *Mutator) Handle(ctx context.Context, req admission.Request) admission.Response {
 	pod := &v1.Pod{}
 
 	if err := mutator.Decoder.Decode(req, pod); err != nil {

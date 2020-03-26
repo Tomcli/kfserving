@@ -36,5 +36,7 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
+[link](docs/samples/tensorflow)
+
 ## Uploading your own model
 The sample model for the example in this readme is already uploaded and available for use. However if you would like to modify the example to use your own ONNX model, all you need to do is to upload your model as `model.onnx` to S3, GCS or an Azure Blob.

@@ -18,16 +18,17 @@ package logger
 
 import (
 	"bytes"
-	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
-	"github.com/onsi/gomega"
 	"io/ioutil"
-	pkglogging "knative.dev/pkg/logging"
 	"net/http"
 	"net/http/httptest"
 	"net/http/httputil"
 	"net/url"
-	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 	"testing"
+
+	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
+	"github.com/onsi/gomega"
+	pkglogging "knative.dev/pkg/logging"
+	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 )
 
 func TestLogger(t *testing.T) {
@@ -76,7 +77,7 @@ func TestLogger(t *testing.T) {
 
 	StartDispatcher(5, logger)
 	httpProxy := httputil.NewSingleHostReverseProxy(targetUri)
-	oh := New(logSvcUrl, sourceUri, v1beta1.LogAll, "mymodel", "default", "default", httpProxy)
+	oh := New(logSvcUrl, sourceUri, v1beta1.LogAll, "mymodel", "default", "default", "plain", httpProxy)
 
 	oh.ServeHTTP(w, r)
 

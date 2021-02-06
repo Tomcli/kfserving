@@ -18,6 +18,8 @@ package logger
 
 import (
 	"net/url"
+
+	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
 )
 
 type LogRequestType string
@@ -37,4 +39,5 @@ type LogRequest struct {
 	InferenceService string
 	Namespace        string
 	Endpoint         string
+	PayloadSchema    v1beta1.PayloadSchemaType
 }

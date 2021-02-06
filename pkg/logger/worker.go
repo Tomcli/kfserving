@@ -19,11 +19,13 @@ package logger
 import (
 	"context"
 	"fmt"
-	"github.com/cloudevents/sdk-go"
-	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
-	"go.uber.org/zap"
 	"net/http"
 	"time"
+
+	cloudevents "github.com/cloudevents/sdk-go"
+	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
+	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
+	"go.uber.org/zap"
 )
 
 const (
@@ -108,7 +110,14 @@ func (w *Worker) sendCloudEvent(logReq LogRequest) error {
 
 	event.SetSource(logReq.SourceUri.String())
 	event.SetDataContentType(logReq.ContentType)
-	if err := event.SetData(*logReq.Bytes); err != nil {
+	payload := *logReq.Bytes
+	if logReq.PayloadSchema == v1beta1.SchemaKafkaConnect {
+		payload, err = CreateKafkaConnectPayload(logReq)
+		if err != nil {
+			return fmt.Errorf("while creating Kafka Connect payload: %s", err)
+		}
+	}
+	if err := event.SetData(payload); err != nil {
 		return fmt.Errorf("while setting cloudevents data: %s", err)
 	}
 

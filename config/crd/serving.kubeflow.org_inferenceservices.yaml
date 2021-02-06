@@ -671,6 +671,11 @@ spec:
                         properties:
                           mode:
                             type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
+                            type: string
                           url:
                             type: string
                         type: object
@@ -1266,6 +1271,11 @@ spec:
                       logger:
                         properties:
                           mode:
+                            type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
                             type: string
                           url:
                             type: string
@@ -2032,6 +2042,11 @@ spec:
                       logger:
                         properties:
                           mode:
+                            type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
                             type: string
                           url:
                             type: string
@@ -2674,6 +2689,11 @@ spec:
                         properties:
                           mode:
                             type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
+                            type: string
                           url:
                             type: string
                         type: object
@@ -3269,6 +3289,11 @@ spec:
                       logger:
                         properties:
                           mode:
+                            type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
                             type: string
                           url:
                             type: string
@@ -4035,6 +4060,11 @@ spec:
                       logger:
                         properties:
                           mode:
+                            type: string
+                          payloadSchema:
+                            enum:
+                            - plain
+                            - kafkaConnect
                             type: string
                           url:
                             type: string
@@ -7166,6 +7196,11 @@ spec:
                         - request
                         - response
                         type: string
+                      payloadSchema:
+                        enum:
+                        - plain
+                        - kafkaConnect
+                        type: string
                       url:
                         type: string
                     type: object
@@ -9872,6 +9907,11 @@ spec:
                         - all
                         - request
                         - response
+                        type: string
+                      payloadSchema:
+                        enum:
+                        - plain
+                        - kafkaConnect
                         type: string
                       url:
                         type: string
@@ -15761,6 +15801,11 @@ spec:
                         - all
                         - request
                         - response
+                        type: string
+                      payloadSchema:
+                        enum:
+                        - plain
+                        - kafkaConnect
                         type: string
                       url:
                         type: string

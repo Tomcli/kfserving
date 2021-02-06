@@ -128,6 +128,7 @@ func addLoggerAnnotations(logger *v1beta1.LoggerSpec, annotations map[string]str
 		if logger.URL != nil {
 			annotations[constants.LoggerSinkUrlInternalAnnotationKey] = *logger.URL
 		}
+		annotations[constants.LoggerPayloadSchemaAnnotationKey] = string(logger.PayloadSchema)
 		annotations[constants.LoggerModeInternalAnnotationKey] = string(logger.Mode)
 		return true
 	}

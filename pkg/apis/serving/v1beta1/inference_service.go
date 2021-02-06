@@ -49,6 +49,18 @@ const (
 	LogResponse LoggerType = "response"
 )
 
+// PayloadSchemaType defines the event payload schema
+// +kubebuilder:validation:Enum=plain;kafkaConnect
+type PayloadSchemaType string
+
+// PayloadSchemaType Enum
+const (
+	// Logger mode to log both request and response
+	SchemaPlain PayloadSchemaType = "plain"
+	// Logger mode to log only request
+	SchemaKafkaConnect PayloadSchemaType = "kafkaConnect"
+)
+
 // LoggerSpec specifies optional payload logging available for all components
 type LoggerSpec struct {
 	// URL to send logging events
@@ -61,6 +73,12 @@ type LoggerSpec struct {
 	// - "response": log only response <br />
 	// +optional
 	Mode LoggerType `json:"mode,omitempty"`
+	// PayloadSchema for the event payload structure <br />
+	// Valid values are: <br />
+	// - "plain" (default): plain request and response; <br />
+	// - "kafkaConnect": Kafka Connect schema JSON; <br />
+	// +optional
+	PayloadSchema PayloadSchemaType `json:"payloadSchema,omitempty"`
 }
 
 // Batcher specifies optional payload batching available for all components

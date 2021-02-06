@@ -132,8 +132,9 @@ func (src *InferenceService) ConvertTo(dstRaw conversion.Hub) error {
 	}
 	if src.Spec.Default.Predictor.Logger != nil {
 		dst.Spec.Predictor.Logger = &v1beta1.LoggerSpec{
-			URL:  src.Spec.Default.Predictor.Logger.Url,
-			Mode: v1beta1.LoggerType(src.Spec.Default.Predictor.Logger.Mode),
+			URL:           src.Spec.Default.Predictor.Logger.Url,
+			Mode:          v1beta1.LoggerType(src.Spec.Default.Predictor.Logger.Mode),
+			PayloadSchema: v1beta1.PayloadSchemaType(src.Spec.Default.Predictor.Logger.PayloadSchema),
 		}
 	}
 	if src.Spec.Default.Predictor.ServiceAccountName != "" {
@@ -298,8 +299,9 @@ func (dst *InferenceService) ConvertFrom(srcRaw conversion.Hub) error {
 	}
 	if src.Spec.Predictor.Logger != nil {
 		dst.Spec.Default.Predictor.Logger = &Logger{
-			Url:  src.Spec.Predictor.Logger.URL,
-			Mode: LoggerMode(src.Spec.Predictor.Logger.Mode),
+			Url:           src.Spec.Predictor.Logger.URL,
+			Mode:          LoggerMode(src.Spec.Predictor.Logger.Mode),
+			PayloadSchema: PayloadSchemaType(src.Spec.Predictor.Logger.PayloadSchema),
 		}
 	}
 	//Transformer

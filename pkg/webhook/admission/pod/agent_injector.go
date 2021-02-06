@@ -19,12 +19,13 @@ package pod
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
+
 	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
 	"github.com/kubeflow/kfserving/pkg/constants"
 	"github.com/kubeflow/kfserving/pkg/credentials"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
-	"strings"
 )
 
 const (
@@ -35,6 +36,7 @@ const (
 	LoggerArgumentInferenceService = "--inference-service"
 	LoggerArgumentNamespace        = "--namespace"
 	LoggerArgumentEndpoint         = "--endpoint"
+	LoggerArgumentPayloadSchema    = "--payload-schema"
 )
 
 type AgentConfig struct {
@@ -173,6 +175,11 @@ func (ag *AgentInjector) InjectAgent(pod *v1.Pod) error {
 			logMode = string(v1beta1.LogAll)
 		}
 
+		payloadSchema, ok := pod.ObjectMeta.Annotations[constants.LoggerPayloadSchemaAnnotationKey]
+		if !ok || payloadSchema == "" {
+			payloadSchema = string(v1beta1.SchemaPlain)
+		}
+
 		inferenceServiceName, _ := pod.ObjectMeta.Labels[constants.InferenceServiceLabel]
 		namespace := pod.ObjectMeta.Namespace
 		endpoint := pod.ObjectMeta.Labels[constants.KServiceEndpointLabel]
@@ -190,6 +197,8 @@ func (ag *AgentInjector) InjectAgent(pod *v1.Pod) error {
 			namespace,
 			LoggerArgumentEndpoint,
 			endpoint,
+			LoggerArgumentPayloadSchema,
+			payloadSchema,
 		}
 		args = append(args, loggerArgs...)
 	}

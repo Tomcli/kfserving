@@ -4,6 +4,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"net"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
+	"os"
+	"strconv"
+	"time"
+
 	"github.com/kelseyhightower/envconfig"
 	"github.com/kubeflow/kfserving/pkg/agent"
 	"github.com/kubeflow/kfserving/pkg/agent/storage"
@@ -20,13 +28,6 @@ import (
 	"knative.dev/serving/pkg/queue"
 	"knative.dev/serving/pkg/queue/health"
 	"knative.dev/serving/pkg/queue/readiness"
-	"net"
-	"net/http"
-	"net/http/httputil"
-	"net/url"
-	"os"
-	"strconv"
-	"time"
 )
 
 var (
@@ -41,6 +42,7 @@ var (
 	workers          = flag.Int("workers", 5, "Number of workers")
 	sourceUri        = flag.String("source-uri", "", "The source URI to use when publishing cloudevents")
 	logMode          = flag.String("log-mode", string(v1beta1.LogAll), "Whether to log 'request', 'response' or 'all'")
+	payloadSchema    = flag.String("payload-schema", string(v1beta1.SchemaPlain), "Whether to structure the payload as 'plain', or 'kafkaConnect'")
 	inferenceService = flag.String("inference-service", "", "The InferenceService name to add as header to log events")
 	namespace        = flag.String("namespace", "", "The namespace to add as header to log events")
 	endpoint         = flag.String("endpoint", "", "The endpoint name to add as header to log events")
@@ -69,12 +71,13 @@ type config struct {
 }
 
 type loggerArgs struct {
-	loggerType       v1beta1.LoggerType
-	logUrl           *url.URL
-	sourceUrl        *url.URL
-	inferenceService string
-	namespace        string
-	endpoint         string
+	loggerType        v1beta1.LoggerType
+	logUrl            *url.URL
+	sourceUrl         *url.URL
+	inferenceService  string
+	namespace         string
+	endpoint          string
+	payloadSchemaType v1beta1.PayloadSchemaType
 }
 
 type batcherArgs struct {
@@ -246,15 +249,25 @@ func startLogger(workers int, logger *zap.SugaredLogger) *loggerArgs {
 		logger.Errorf("Malformed source_uri %s", *sourceUri)
 		os.Exit(-1)
 	}
+
+	schema := v1beta1.PayloadSchemaType(*payloadSchema)
+	switch schema {
+	case v1beta1.SchemaPlain, v1beta1.SchemaKafkaConnect:
+	default:
+		logger.Errorf("Malformed payload-schema %s", *payloadSchema)
+		os.Exit(-1)
+	}
+
 	logger.Info("Starting the log dispatcher")
 	kfslogger.StartDispatcher(workers, logger)
 	return &loggerArgs{
-		loggerType:       loggingMode,
-		logUrl:           logUrlParsed,
-		sourceUrl:        sourceUriParsed,
-		inferenceService: *inferenceService,
-		endpoint:         *endpoint,
-		namespace:        *namespace,
+		loggerType:        loggingMode,
+		logUrl:            logUrlParsed,
+		sourceUrl:         sourceUriParsed,
+		inferenceService:  *inferenceService,
+		endpoint:          *endpoint,
+		namespace:         *namespace,
+		payloadSchemaType: schema,
 	}
 }
 
@@ -311,7 +324,7 @@ func buildServer(ctx context.Context, port string, userPort string, loggerArgs *
 		}
 		if loggerArgs != nil {
 			composedHandler = kfslogger.New(loggerArgs.logUrl, loggerArgs.sourceUrl, loggerArgs.loggerType,
-				loggerArgs.inferenceService, loggerArgs.namespace, loggerArgs.endpoint, composedHandler)
+				loggerArgs.inferenceService, loggerArgs.namespace, loggerArgs.endpoint, loggerArgs.payloadSchemaType, composedHandler)
 		}
 		composedHandler = queue.ForwardedShimHandler(composedHandler)
 

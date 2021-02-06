@@ -18,10 +18,11 @@ package constants
 
 import (
 	"fmt"
-	"knative.dev/serving/pkg/apis/autoscaling"
 	"os"
 	"regexp"
 	"strings"
+
+	"knative.dev/serving/pkg/apis/autoscaling"
 
 	"knative.dev/pkg/network"
 
@@ -70,6 +71,7 @@ var (
 	LoggerInternalAnnotationKey                      = InferenceServiceInternalAnnotationsPrefix + "/logger"
 	LoggerSinkUrlInternalAnnotationKey               = InferenceServiceInternalAnnotationsPrefix + "/logger-sink-url"
 	LoggerModeInternalAnnotationKey                  = InferenceServiceInternalAnnotationsPrefix + "/logger-mode"
+	LoggerPayloadSchemaAnnotationKey                 = InferenceServiceInternalAnnotationsPrefix + "/payload-schema"
 	BatcherInternalAnnotationKey                     = InferenceServiceInternalAnnotationsPrefix + "/batcher"
 	BatcherMaxBatchSizeInternalAnnotationKey         = InferenceServiceInternalAnnotationsPrefix + "/batcher-max-batchsize"
 	BatcherMaxLatencyInternalAnnotationKey           = InferenceServiceInternalAnnotationsPrefix + "/batcher-max-latency"

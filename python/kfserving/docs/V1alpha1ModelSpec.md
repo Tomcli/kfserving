@@ -1,6 +1,6 @@
 # V1alpha1ModelSpec
 
-ModelSpec describes a trained model
+ModelSpec describes a TrainedModel
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1957,6 +1957,10 @@
           "description": "Specifies the scope of the loggers. \u003cbr /\u003e Valid values are: \u003cbr /\u003e - \"all\" (default): log both request and response; \u003cbr /\u003e - \"request\": log only request; \u003cbr /\u003e - \"response\": log only response \u003cbr /\u003e",
           "type": "string"
         },
+        "payloadSchema": {
+          "description": "PayloadSchema for the event payload structure \u003cbr /\u003e Valid values are: \u003cbr /\u003e - \"plain\" (default): plain request and response; \u003cbr /\u003e - \"kafkaConnect\": Kafka Connect schema JSON; \u003cbr /\u003e",
+          "type": "string"
+        },
         "url": {
           "description": "URL to send logging events",
           "type": "string"

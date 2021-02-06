@@ -48,26 +48,31 @@ class V1beta1LoggerSpec(object):
     """
     openapi_types = {
         'mode': 'str',
+        'payload_schema': 'str',
         'url': 'str'
     }
 
     attribute_map = {
         'mode': 'mode',
+        'payload_schema': 'payloadSchema',
         'url': 'url'
     }
 
-    def __init__(self, mode=None, url=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, mode=None, payload_schema=None, url=None, local_vars_configuration=None):  # noqa: E501
         """V1beta1LoggerSpec - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._mode = None
+        self._payload_schema = None
         self._url = None
         self.discriminator = None
 
         if mode is not None:
             self.mode = mode
+        if payload_schema is not None:
+            self.payload_schema = payload_schema
         if url is not None:
             self.url = url
 
@@ -93,6 +98,29 @@ class V1beta1LoggerSpec(object):
         """
 
         self._mode = mode
+
+    @property
+    def payload_schema(self):
+        """Gets the payload_schema of this V1beta1LoggerSpec.  # noqa: E501
+
+        PayloadSchema for the event payload structure <br /> Valid values are: <br /> - \"plain\" (default): plain request and response; <br /> - \"kafkaConnect\": Kafka Connect schema JSON; <br />  # noqa: E501
+
+        :return: The payload_schema of this V1beta1LoggerSpec.  # noqa: E501
+        :rtype: str
+        """
+        return self._payload_schema
+
+    @payload_schema.setter
+    def payload_schema(self, payload_schema):
+        """Sets the payload_schema of this V1beta1LoggerSpec.
+
+        PayloadSchema for the event payload structure <br /> Valid values are: <br /> - \"plain\" (default): plain request and response; <br /> - \"kafkaConnect\": Kafka Connect schema JSON; <br />  # noqa: E501
+
+        :param payload_schema: The payload_schema of this V1beta1LoggerSpec.  # noqa: E501
+        :type: str
+        """
+
+        self._payload_schema = payload_schema
 
     @property
     def url(self):

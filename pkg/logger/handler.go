@@ -18,14 +18,15 @@ package logger
 
 import (
 	"bytes"
-	"github.com/go-logr/logr"
-	guuid "github.com/google/uuid"
-	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
 	"io/ioutil"
-	"knative.dev/pkg/network"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+
+	"github.com/go-logr/logr"
+	guuid "github.com/google/uuid"
+	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
+	"knative.dev/pkg/network"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 )
 
@@ -37,11 +38,13 @@ type LoggerHandler struct {
 	inferenceService string
 	namespace        string
 	endpoint         string
+	payloadSchema    v1beta1.PayloadSchemaType
 	next             http.Handler
 }
 
 func New(logUrl *url.URL, sourceUri *url.URL, logMode v1beta1.LoggerType,
-	inferenceService string, namespace string, endpoint string, next http.Handler) http.Handler {
+	inferenceService string, namespace string, endpoint string,
+	payloadSchema v1beta1.PayloadSchemaType, next http.Handler) http.Handler {
 	logf.SetLogger(logf.ZapLogger(false))
 	return &LoggerHandler{
 		log:              logf.Log.WithName("Logger"),
@@ -51,6 +54,7 @@ func New(logUrl *url.URL, sourceUri *url.URL, logMode v1beta1.LoggerType,
 		inferenceService: inferenceService,
 		namespace:        namespace,
 		endpoint:         endpoint,
+		payloadSchema:    payloadSchema,
 		next:             next,
 	}
 }
@@ -93,6 +97,7 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			InferenceService: eh.inferenceService,
 			Namespace:        eh.namespace,
 			Endpoint:         eh.endpoint,
+			PayloadSchema:    eh.payloadSchema,
 		}); err != nil {
 			eh.log.Error(err, "Failed to log request")
 		}
@@ -116,6 +121,7 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				InferenceService: eh.inferenceService,
 				Namespace:        eh.namespace,
 				Endpoint:         eh.endpoint,
+				PayloadSchema:    eh.payloadSchema,
 			}); err != nil {
 				eh.log.Error(err, "Failed to log response")
 			}
